@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class VkUserAndGroupController {
             description = "Return last name, first name, middle name and boolean value of membership to group")
     @ApiResponse(responseCode = "200", description = "Data obtained")
     @PostMapping("/info")
+    @PreAuthorize("hasRole('USER')")
     public ResponseDto info(
             @Parameter(description = "Request DTO", required = true)
             @RequestBody RequestDto requestVkUserDto,
