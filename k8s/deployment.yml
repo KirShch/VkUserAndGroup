@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vkuserandgroup-app
+  labels:
+    app: vkuserandgroup-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vkuserandgroup-app
+  template:
+    metadata:
+      labels:
+        app: vkuserandgroup-app
+    spec:
+      containers:
+        - name: vkuserandgroup-app
+          image: vkuserandgroup-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "default"
